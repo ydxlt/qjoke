@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="itemBinding" format="reference" />
+    <attr name="items" format="reference" />
+    <attr name="uri" format="string" />
+    <attr name="isRefreshing" format="boolean" />
+
+    <attr name="onCompletionCommand" format="reference" />
+    <attr name="onErrorCommand" format="reference" />
+
+    <declare-styleable name="SimpleDraweeView">
+        <!-- require String to load Image"-->
+        <attr name="uri" />
+    </declare-styleable>
+
+    <declare-styleable name="VideoView">
+        <attr name="onCompletionCommand"></attr>
+        <attr name="onErrorCommand"></attr>
+    </declare-styleable>
+</resources>
