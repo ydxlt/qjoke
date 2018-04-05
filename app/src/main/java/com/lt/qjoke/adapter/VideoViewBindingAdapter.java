@@ -1,6 +1,8 @@
 package com.lt.qjoke.adapter;
 
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.widget.VideoView;
 
 import com.lt.qjoke.command.ReplyCommand;
@@ -28,5 +30,19 @@ public class VideoViewBindingAdapter {
             }
             return false;
         });
+    }
+
+    @android.databinding.BindingAdapter({"videoPath"})
+    public static void setVideoPath(VideoView videoView,String videoPath){
+        if (!TextUtils.isEmpty(videoPath)) {
+            videoView.setVideoPath(videoPath);
+        }
+    }
+    @android.databinding.BindingAdapter({"onStartCommand"})
+    public static void onStartCommand(VideoView videoView,ReplyCommand<VideoView> replyCommand){
+        videoView.start();
+        if(replyCommand != null){
+            replyCommand.execute(videoView);
+        }
     }
 }

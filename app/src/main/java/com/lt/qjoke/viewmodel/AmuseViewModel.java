@@ -39,7 +39,6 @@ import rx.schedulers.Schedulers;
 
 public class AmuseViewModel implements ViewModel{
 
-    public static final String TOKEN_GET_AMUSE_FINISH = App.sPackageName + "get_amuse_finish";
     private static final java.lang.String TAG = "AmuseViewModel";
 
     private Context mContext;
@@ -49,7 +48,7 @@ public class AmuseViewModel implements ViewModel{
     public ViewStyle viewStyle = new ViewStyle();
     public class ViewStyle{
         public final ObservableBoolean isRefreshing = new ObservableBoolean(false);
-        public final ObservableBoolean isLoadVisibility = new ObservableBoolean(false);
+        public final ObservableBoolean isLoadVisibility = new ObservableBoolean(true);
     }
 
     // itew view model
@@ -79,6 +78,6 @@ public class AmuseViewModel implements ViewModel{
     public AmuseViewModel(Context context, String mType) {
         this.mContext = context;
         this.mType = mType;
-        new AmuseModel().getAmuses("", mType, 1, amuse -> items.add(new AmuseItemViewModel(amuse,mContext)));
+        new AmuseModel().getAmuses("", mType, 1,a -> viewStyle.isLoadVisibility.set(false), amuse -> items.add(new AmuseItemViewModel(amuse,mContext)));
     }
 }

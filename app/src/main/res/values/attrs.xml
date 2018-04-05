@@ -4,9 +4,15 @@
     <attr name="items" format="reference" />
     <attr name="uri" format="string" />
     <attr name="isRefreshing" format="boolean" />
+    <attr name="videoPath" format="string" />
+    <attr name="requestFocus" format="boolean" />
+    <attr name="background" format="reference" />
 
+    <attr name="onStartCommand" format="reference" />
     <attr name="onCompletionCommand" format="reference" />
     <attr name="onErrorCommand" format="reference" />
+    <attr name="onClickCommand" format="reference" />
+    <attr name="onSeekBarChangeCommand" format="reference" />
 
     <declare-styleable name="SimpleDraweeView">
         <!-- require String to load Image"-->
@@ -16,5 +22,12 @@
     <declare-styleable name="VideoView">
         <attr name="onCompletionCommand"></attr>
         <attr name="onErrorCommand"></attr>
+        <attr name="videoPath"></attr>
+        <attr name="onStartCommand"></attr>
+        <attr name="requestFocus"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="SeekBar">
+        <attr name="onSeekBarChangeCommand"></attr>
     </declare-styleable>
 </resources>

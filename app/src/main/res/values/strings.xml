@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">qjoke</string>
+    <string name="app_name">趣笑话</string>
     <string name="action_settings">设置</string>
     <string name="action_about">关于</string>
+    <string name="author">作者：宿醉</string>
+    <string name="contact">QQ：1571167656</string>
+    <string name="copyright_description">本应用数据来源于SHOWAPI百思不得姐开放接口，文章内容和观点不代表作者的立场，不代表作者认同文章观点。</string>
+    <string name="skip">3s 跳过</string>
 </resources>

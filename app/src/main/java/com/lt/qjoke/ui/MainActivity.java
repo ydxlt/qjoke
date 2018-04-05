@@ -1,31 +1,25 @@
-package com.lt.qjoke;
+package com.lt.qjoke.ui;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.lt.qjoke.R;
 import com.lt.qjoke.adapter.AmusePagerAdapter;
+import com.lt.qjoke.base.BaseActivity;
+import com.lt.qjoke.databinding.ActivityMainBinding;
+import com.lt.qjoke.messenger.Messenger;
 import com.lt.qjoke.retrofit.AmuseService;
 import com.lt.qjoke.utils.LogUtils;
 import com.lt.qjoke.viewmodel.MainViewModel;
 
-import java.io.Serializable;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -33,16 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private MenuItem mSearchMenuItem;
     private SearchView mSearchView;
+    private MainViewModel mMainViewModel;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-//        activityMainBinding.setVariable(BR.viewModel,new MainViewModel());
-        initToolbar();
-        initViewPager();
-    }
 
     private void initViewPager() {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -53,17 +39,18 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        toolbar.setNavigationIcon(R.mipmap.ic_study);
+    protected void initToolbar() {
+        super.initToolbar();
+        getToolbar().setNavigationIcon(R.mipmap.ic_study);
+    }
+
+    @Override
+    protected void initView() {
+        setContentView(R.layout.activity_main);
+        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mMainViewModel = new MainViewModel(this);
+        activityMainBinding.setViewModel(mMainViewModel);
+        initViewPager();
     }
 
     @Override
@@ -79,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(query)){
                     return false;
                 }
+                mMainViewModel.queryAmuse(query);
 //                mMainPresenter.getAmuse(query);
                 mSearchView.clearFocus(); // 收起键盘
                 return true;
@@ -97,14 +85,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_settings:
-//                startActivity(new Intent(this,SettingActivity.class));
+                startActivity(new Intent(this,SettingActivity.class));
                 break;
             case R.id.action_about:
-//                startActivity(new Intent(this,AboutActivity.class));
+                startActivity(new Intent(this,AboutActivity.class));
                 break;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Messenger.getDefault().unregister(this);
     }
 }

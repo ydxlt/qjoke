@@ -40,7 +40,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <!-- Your scrolling content -->
+        <!-- Your scrolling dataBean -->
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"

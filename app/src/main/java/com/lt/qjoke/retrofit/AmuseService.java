@@ -1,6 +1,7 @@
 package com.lt.qjoke.retrofit;
 
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface AmuseService {
     @GET("255-1")
     Observable<Amuse> getAmuseList(@QueryMap Map<String,String> params);
 
-    class Amuse{
+    class Amuse implements Serializable{
 
         public static final String TYPE_EPISODE = "29";
         public static final String TYPE_IMAGE = "10";
@@ -53,7 +54,7 @@ public interface AmuseService {
             this.showapi_res_body = showapi_res_body;
         }
 
-        public static class ResBody{
+        public static class ResBody  implements Serializable {
             private int ret_code;
             private PageBean pagebean;
 
@@ -73,7 +74,7 @@ public interface AmuseService {
                 this.pagebean = pagebean;
             }
 
-            public static class PageBean{
+            public static class PageBean implements Serializable{
                 private int allPages;
                 private List<Content> contentlist;
 
@@ -93,7 +94,7 @@ public interface AmuseService {
                     this.contentlist = contentlist;
                 }
 
-                public static class Content{
+                public static class Content implements Serializable{
                     private String text;
                     private String hate;
                     private String videotime;
@@ -112,6 +113,15 @@ public interface AmuseService {
                     private String name;
                     private String create_time;
                     private String cdn_img;
+                    private String video_uri; // 视频url
+
+                    public String getVideo_uri() {
+                        return video_uri;
+                    }
+
+                    public void setVideo_uri(String video_uri) {
+                        this.video_uri = video_uri;
+                    }
 
                     public String getText() {
                         return text;

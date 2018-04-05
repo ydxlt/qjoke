@@ -80,11 +80,15 @@
                     android:id="@+id/seekbar"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:max="@{viewModel.viewStyle.seekBarMax}"
+                    android:progress="@{viewModel.viewStyle.seekBarProgress}"
+                    app:onSeekBarChangeCommand="@{viewModel.onSeekBarChangeCommand}"
                     android:layout_height="wrap_content"/>
 
                 <ImageButton
                     android:id="@+id/ib_play"
                     android:background="@null"
+                    app:onClickCommand="@{viewModel.onClickCommand}"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/selector_play"
                     android:layout_width="wrap_content"
