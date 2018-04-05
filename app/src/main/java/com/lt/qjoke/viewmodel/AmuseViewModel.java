@@ -22,8 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 
-import me.tatarka.bindingcollectionadapter2.ItemBinding;
-import me.tatarka.bindingcollectionadapter2.OnItemBind;
+import me.tatarka.bindingcollectionadapter.BaseItemViewSelector;
+import me.tatarka.bindingcollectionadapter.ItemView;
+import me.tatarka.bindingcollectionadapter.ItemViewSelector;
 import rx.Observable;
 import rx.Scheduler;
 import rx.Subscriber;
@@ -54,21 +55,21 @@ public class AmuseViewModel implements ViewModel{
     // itew view model
     public final ObservableList<AmuseItemViewModel> items = new ObservableArrayList<>();
     // view item layout for recyclerview
-    public final OnItemBind<String> itemBinding = new OnItemBind<String>() {
+    public final ItemViewSelector<AmuseItemViewModel> itemView = new BaseItemViewSelector<AmuseItemViewModel>() {
         @Override
-        public void onItemBind(ItemBinding itemBinding, int position, String item) {
+        public void select(ItemView itemView, int position, AmuseItemViewModel item) {
             switch (mType){
                 case AmuseService.Amuse.TYPE_EPISODE:
-                    itemBinding.set(com.lt.qjoke.BR.viewModel,R.layout.item_text_amuse);
+                    itemView.set(com.lt.qjoke.BR.viewModel,R.layout.item_text_amuse);
                     break;
                 case AmuseService.Amuse.TYPE_IMAGE:
-                    itemBinding.set(com.lt.qjoke.BR.viewModel,R.layout.item_image_amuse);
+                    itemView.set(com.lt.qjoke.BR.viewModel,R.layout.item_image_amuse);
                     break;
                 case AmuseService.Amuse.TYPE_VIDEO:
-                    itemBinding.set(com.lt.qjoke.BR.viewModel,R.layout.item_video_amuse);
+                    itemView.set(com.lt.qjoke.BR.viewModel,R.layout.item_video_amuse);
                     break;
                 case AmuseService.Amuse.TYPE_VOICE:
-                    itemBinding.set(com.lt.qjoke.BR.viewModel,R.layout.item_voice_amuse);
+                    itemView.set(com.lt.qjoke.BR.viewModel,R.layout.item_voice_amuse);
                     break;
             }
         }

@@ -45,8 +45,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.1.1'
 
     // use for
-    compile 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:2.2.0'
-	compile 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.2.0'
+    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter:1.1.0'
+    compile 'me.tatarka.bindingcollectionadapter:bindingcollectionadapter-recyclerview:1.1.0'
 
     // retrofit
     compile 'com.squareup.retrofit2:retrofit:2.0.1'

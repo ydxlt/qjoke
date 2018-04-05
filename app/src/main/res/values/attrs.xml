@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="itemBinding" format="reference" />
+    <attr name="itemView" format="reference" />
     <attr name="items" format="reference" />
     <attr name="uri" format="string" />
     <attr name="isRefreshing" format="boolean" />
